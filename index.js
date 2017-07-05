@@ -151,6 +151,9 @@ $(document).ready(function() {
 
     window.MODAL = {
 
+        // Can set to true to stop overlay from closing modal
+        overlayLock: false,
+
         _detachContent: function() {
             // be responsible with whatever content was loaded in, give an option to put it back
             // by triggering an event on the children.  It's up to the loader to handle the
@@ -356,7 +359,12 @@ $(document).ready(function() {
         }
     });
 
-    $els.overlay.on('click', MODAL.close );
+
+    $els.overlay.on('click', function() {
+        if (!MODAL.overlayLock) {
+            MODAL.close();
+        }
+    });
     // $els.close.on('click', MODAL.close );
 
 
