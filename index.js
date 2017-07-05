@@ -355,15 +355,20 @@ $(document).ready(function() {
     $els.scroller.on('click', function(e) {
 
         if ( $(e.target).is( $(this) ) ) {
-            MODAL.close();
+
+           if (!MODAL.overlayLock) {
+                MODAL.close();
+            }
         }
     });
 
 
     $els.overlay.on('click', function() {
+
         if (!MODAL.overlayLock) {
             MODAL.close();
         }
+
     });
     // $els.close.on('click', MODAL.close );
 
@@ -402,8 +407,6 @@ $(document).ready(function() {
                 !$(ev.target).is( $els.scroller ) && // our target is NOT the scroller AND
                 !$.contains( $els.scroller[0], ev.target )  // our target is NOT a CHILD of the scroller
             );
-
-            console.log( scrolling.locked  );
 
             if (notScrollingContent) {
                 prevent(ev);
